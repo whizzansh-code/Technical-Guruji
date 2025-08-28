@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tech Institute — ADCA / CCC / C++ / Hacking</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Basic reset & font -->
+  <style>
+    :root{
+      --primary:#0b63b5;
+      --accent:#05c6a7;
+      --dark:#0a2436;
+      --muted:#6b7a88;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.04);
+      --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:#0f1724;
+      background: linear-gradient(180deg,#8eb4e9 0%, #98eed2 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit; text-decoration:none}
+    img{display:block; max-width:100%}
+
+    /* Container */
+    .container{width:90%; max-width:1180px; margin:0 auto}
+
+    /* NAVBAR */
+    header.site-header{
+      background:linear-gradient(90deg,var(--primary), #0066d6 60%);
+      color:white;
+      padding:14px 0;
+      position:sticky;
+      top:0;
+      z-index:60;
+      box-shadow: 0 6px 18px rgba(6,30,60,0.12);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:60px; height:60px; border-radius:10px; object-fit:cover; box-shadow:0 6px 18px rgba(0,0,0,0.25)}
+    .brand .title{font-weight:700; font-size:18px}
+    nav.primary{display:flex; gap:18px; align-items:center}
+    nav.primary a{color:rgba(255,255,255,0.95); font-weight:600; padding:6px 10px; border-radius:8px}
+    nav.primary a:hover{background:rgba(255,255,255,0.06)}
+    .cta-btn{background:linear-gradient(90deg,var(--accent), #19c6d6); padding:10px 16px; border-radius:999px; color:#002; font-weight:700; box-shadow:0 6px 16px rgba(5,198,167,0.18)}
+
+    /* HERO */
+    .hero{display:flex; align-items:center; gap:30px; padding:64px 0}
+    .hero-left{flex:1}
+    .hero-right{flex:1; text-align:right}
+    .hero h1{font-size:40px; line-height:1.02; margin:0 0 16px; color:white; text-shadow:0 4px 18px rgba(0,0,0,0.25)}
+    .hero p{color:rgba(255,255,255,0.9); margin:0 0 22px; font-size:16px}
+    .hero .buttons{display:flex; gap:12px; justify-content:flex-start}
+    .btn-primary{background:#fff; color:var(--primary); padding:12px 18px; border-radius:10px; font-weight:700}
+    .btn-outline{background:transparent; border:2px solid rgba(255,255,255,0.18); padding:10px 16px; color:#fff; border-radius:10px; font-weight:600}
+
+    .hero-right img{width:420px; border-radius:14px; box-shadow:0 18px 50px rgba(2,6,23,0.25); margin-left:auto}
+
+    /* FEATURES BAR */
+    .features{display:flex; gap:18px; justify-content:space-between; background:var(--primary); padding:22px; border-radius:16px; margin-top:-30px; color:white}
+    .feature{display:flex; gap:12px; align-items:center; flex:1; justify-content:center; flex-direction:column; padding:10px}
+    .feature .ic{font-size:22px; background:rgba(255,255,255,0.08); padding:10px; border-radius:12px}
+
+    /* SECTIONS */
+    section{padding:56px 0}
+    .section-title{display:flex; align-items:center; justify-content:space-between; gap:12px;margin-bottom:20px}
+    .section-title h2{margin:0; font-size:28px}
+    .muted{color:var(--muted); font-size:14px}
+
+    /* COURSES GRID */
+    .courses-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:18px}
+    .card{background:var(--card); border-radius:12px; padding:16px; box-shadow:0 6px 20px rgba(12,18,24,0.06); overflow:hidden}
+    .card img{border-radius:8px; height:140px; width:100%; object-fit:cover}
+    .card h3{margin:10px 0 6px; font-size:18px}
+    .card p{margin:0; color:var(--muted)}
+
+    /* RESULTS / ACHIEVEMENTS */
+    .results-row{display:flex; gap:18px; margin-top:18px}
+    .result-img{flex:1; height:200px; border-radius:12px; object-fit:cover; box-shadow:0 6px 20px rgba(12,18,24,0.08)}
+    .stats{display:flex; gap:18px; margin-top:18px}
+    .stat{flex:1; background:linear-gradient(180deg,#061a2a 0%, #073248 100%); color:white; padding:24px; border-radius:12px; text-align:center}
+    .stat h3{margin:0; font-size:22px}
+    .stat p{margin:8px 0 0; color:rgba(255,255,255,0.85)}
+
+    /* WHY US */
+    .why-grid{display:flex; gap:22px; align-items:center}
+    .why-left{flex:1}
+    .why-right{flex:1}
+
+    /* CONTACT */
+    .contact-grid{display:flex; gap:20px}
+    .contact-card{flex:1; background:linear-gradient(180deg,#ffffff,#f3f7fb); padding:20px; border-radius:12px; box-shadow:0 8px 26px rgba(12,18,24,0.06)}
+    .map{height:220px; border-radius:10px; background:linear-gradient(180deg,#e6eef7,#d9eefe); display:flex; align-items:center; justify-content:center; color:var(--muted)}
+
+    /* FOOTER */
+    footer{background:#071e33; color:#cfeaf4; padding:28px 0; margin-top:30px}
+
+    /* WHATSAPP FLOAT */
+    .whatsapp-float{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:120;
+      display:flex;
+      align-items:center;
+      background:linear-gradient(90deg,#25d366,#19c6d6);
+      color:white;
+      padding:12px 14px;
+      border-radius:999px;
+      gap:10px;
+      box-shadow:0 12px 30px rgba(5,198,167,0.18);
+    }
+    .whatsapp-float img{width:26px; height:26px}
+
+    /* RESPONSIVE */
+    @media (max-width:992px){
+      .hero{flex-direction:column; text-align:left}
+      .hero-right{text-align:left}
+      .hero-right img{width:100%}
+      .features{flex-direction:column}
+      .courses-grid{grid-template-columns:repeat(2,1fr)}
+      .results-row{flex-direction:column}
+      .why-grid{flex-direction:column}
+      nav.primary{display:none}
+    }
+    @media (max-width:520px){
+      .courses-grid{grid-template-columns:1fr}
+      header.site-header{padding:10px}
+      .brand img{width:46px;height:46px}
+      .hero h1{font-size:28px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="Screenshot_28-8-2025_21186_www.design.com.jpeg" alt="Institute logo">
+        <div>
+          <div class="title">Tech Institute</div>
+          <div style="font-size:12px; color:rgba(255,255,255,0.85)">ADCA • CCC • C++ • Hacking</div>
+        </div>
+      </div>
+
+      <nav class="primary" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#courses">Courses</a>
+        <a href="#results">Results</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="cta-btn" href="#contact">Enroll Now</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="home">
+    <section class="hero container">
+      <div class="hero-left">
+        <h1>Award-Winning Computer Institute — Learn, Build & Succeed</h1>
+        <p>Practical training in ADCA, CCC, C++, Web Development, Ethical Hacking. Strong placement & certificate support across India.</p>
+        <div class="buttons">
+          <a class="btn-primary" href="#courses">View Courses</a>
+          <a class="btn-outline" href="#results">Our Results</a>
+        </div>
+
+        <!-- small highlights under hero -->
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
+          <div class="card" style="display:inline-flex; gap:10px; align-items:center; padding:10px 12px; border-radius:999px;">
+            <strong style="color:var(--primary)">✔</strong> <span style="color:var(--muted)">Hands-on labs</span>
+          </div>
+          <div class="card" style="display:inline-flex; gap:10px; align-items:center; padding:10px 12px; border-radius:999px;">
+            <strong style="color:var(--primary)">✔</strong> <span style="color:var(--muted)">Small batches</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <img src="Screenshot_28-8-2025_21186_www.design.com.jpeg" alt="Institute">
+      </div>
+    </section>
+
+    <!-- FEATURES BAR -->
+    <div class="container" style="margin-top:-18px">
+      <div class="features">
+        <div class="feature">
+          <div class="ic">💻</div>
+          <div style="font-weight:700">Learn Essential Skills</div>
+        </div>
+        <div class="feature">
+          <div class="ic">📜</div>
+          <div style="font-weight:700">Get Certified</div>
+        </div>
+        <div class="feature">
+          <div class="ic">💼</div>
+          <div style="font-weight:700">Placement Support</div>
+        </div>
+        <div class="feature">
+          <div class="ic">🚀</div>
+          <div style="font-weight:700">Upgrade Career</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMISSIONS / CTA -->
+    <section class="container">
+      <div class="section-title">
+        <h2>📢 Admissions Open for Session 2025–2026</h2>
+        <div class="muted">Limited seats — Reserve yours now</div>
+      </div>
+      <div style="text-align:center; margin-top:10px">
+        <a class="btn-primary" href="https://wa.me/919876543210" style="display:inline-block; padding:12px 22px; border-radius:10px">📲 WhatsApp Now</a>
+      </div>
+    </section>
+
+    <!-- COURSES -->
+    <section id="courses" class="container">
+      <div class="section-title">
+        <h2>Courses Offered</h2>
+        <div class="muted">Practical & job-oriented curriculum</div>
+      </div>
+
+      <div class="courses-grid">
+        <div class="card">
+          <img src="Screenshot_28-8-2025_21751_www.bing.com.jpeg" alt="">
+          <h3>ADCA — Advanced Diploma in Computer Applications</h3>
+          <p>Duration: 3 months — Fees: ₹3,500 — Practical + Certificate</p>
+        </div>
+
+        <div class="card">
+          <img src="CCC-Course.jpg" alt="">
+          <h3>CCC — Digital Literacy</h3>
+          <p>Duration: 2 months — Fees: ₹2,500 — Exam guidance</p>
+        </div>
+
+        <div class="card">
+          <img src="Screenshot_28-8-2025_21923_www.bing.com.jpeg" alt="">
+          <h3>C++ Programming</h3>
+          <p>Duration: 2.5 months — Fees: ₹4,000 — Hands-on projects</p>
+        </div>
+
+        <div class="card">
+          <img src="Screenshot_28-8-2025_211029_www.bing.com.jpeg" alt="">
+          <h3>Ethical Hacking & Cyber Security</h3>
+          <p>Duration: 3 months — Fees: ₹6,500 — Lab-based training</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="container">
+      <div class="section-title">
+        <h2>Our Results & Achievements</h2>
+        <div class="muted">Successful students placed across India</div>
+      </div>
+
+      <div class="results-row">
+        <img class="result-img" src="Screenshot_28-8-2025_205745_academyofcomputereducation.in.jpeg">
+        <img class="result-img" src="Screenshot_28-8-2025_205924_academyofcomputereducation.in.jpeg" alt="result">
+        <img class="result-img" src="Screenshot_28-8-2025_21013_academyofcomputereducation.in.jpeg" alt="result">
+      </div>
+
+      <div class="stats" style="margin-top:20px">
+        <div class="stat">
+          <h3>10,000+</h3>
+          <p>Students trained across India</p>
+        </div>
+        <div class="stat">
+          <h3>95%</h3>
+          <p>Pass & certification rate</p>
+        </div>
+        <div class="stat">
+          <h3>85%</h3>
+          <p>Placed / internship assisted</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section id="about" class="container">
+      <div class="section-title">
+        <h2>Why Choose Us?</h2>
+        <div class="muted">Practical training, small batches, experienced faculty</div>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-left">
+          <h3>Practical, project-based learning</h3>
+          <p class="muted">We focus on hands-on labs and real-world projects so students are job-ready.</p>
+          <ul style="margin-top:16px; color:var(--muted)">
+            <li>✔ Experienced trainers</li>
+            <li>✔ Industry-oriented syllabus</li>
+            <li>✔ Flexible timings & weekend batches</li>
+            <li>✔ Certification & placement support</li>
+          </ul>
+        </div>
+
+        <div class="why-right">
+          <img src="Screenshot_28-8-2025_194752_web.whatsapp.com.jpeg" alt="trainers">
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container">
+      <div class="section-title">
+        <h2>Contact & Enroll</h2>
+        <div class="muted">Reach us or visit the center</div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Contact Details</h3>
+          <p class="muted">Phone: <strong>+91-8081833045</strong></p>
+          <p class="muted">Email: <strong>info@angadbhargo32@gmail.com</strong></p>
+          <p class="muted">Address: BBPS Atraulia, Azamgarh</p>
+          <hr style="margin:14px 0; border:none; border-top:1px solid #eef3f8">
+          <h4>Quick Enroll</h4>
+          <form id="enrollForm" onsubmit="return false">
+            <input required placeholder="Full name" style="width:100%; padding:10px; margin-bottom:8px; border-radius:8px; border:1px solid #e6ecf3">
+            <input required placeholder="Phone number" style="width:100%; padding:10px; margin-bottom:8px; border-radius:8px; border:1px solid #e6ecf3">
+            <select style="width:100%; padding:10px; margin-bottom:8px; border-radius:8px; border:1px solid #e6ecf3">
+              <option>Choose course</option>
+              <option>ADCA</option>
+              <option>CCC</option>
+              <option>C++</option>
+              <option>Ethical Hacking</option>
+            </select>
+            <a id="enrollWA" href="https://wa.me/918081833045?text=Hi%20I%20want%20to%20enroll%20in%20your%20institute" target="_blank" class="btn-primary" style="display:inline-block">Request Callback via WhatsApp</a>
+          </form>
+        </div>
+
+        <div class="contact-card">
+          <h3>Visit Us</h3>
+          <div class="map">Google map embed placeholder</div>
+          <p style="margin-top:12px; font-size:14px; color:var(--muted)">Map will be replaced by your Google Maps iframe later. Put your lat/long or embed link.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
+      <div>
+        <strong>Technical Guruji</strong><div style="color:#a8dff4; font-size:13px">ADCA • CCC • C++ • Ethical Hacking</div>
+      </div>
+      <div style="color:#bfeff8">© <span id="year"></span> Tech Institute — All rights reserved</div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a class="whatsapp-float" id="waFloat" target="_blank"
+     href="https://wa.me/918081833045?text=Hello%20Tech%20Institute%2C%20I%20want%20to%20enrol%20for%20a%20course">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="whatsapp">
+    <div style="font-weight:700">Chat on WhatsApp</div>
+  </a>
+
+  <!-- SMALL SCRIPTS -->
+  <script>
+    // set footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // small improvement: when user clicks enroll button take values to WA text
+    const enrollBtn = document.getElementById('enrollWA');
+    const form = document.getElementById('enrollForm');
+    if(enrollBtn){
+      enrollBtn.addEventListener('click', function(e){
+        const inputs = form.querySelectorAll('input, select');
+        const name = inputs[0].value || 'New student';
+        const phone = inputs[1].value || '';
+        const course = inputs[2].value || '';
+        const text = encodeURIComponent(`Hi I am ${name} (${phone}). I want to enroll for ${course}. Please call me.`);
+        enrollBtn.href = `https://wa.me/918081833045?text=${text}`;
+      });
+    }
+  </script>
+
+</body>
+</html>
